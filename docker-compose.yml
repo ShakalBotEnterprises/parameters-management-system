@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  pms_server:
+    image: pms-server-image
+    container_name: pms-server
+    profiles: ["dev", "prod"]
+    build:
+      context: ./
+      dockerfile: docker/pmsServerDockerfile
+    volumes:
+      - pms_server_volume:/volumes/pms_server
+    restart: always
+    networks:
+      - services_network
+    healthcheck:
+      test: [ "CMD", "/volumes/pms_server/healthcheck/pms-server-healthcheck.sh" ]
+      interval: 30s
+      timeout: 10s
+      retries: 6
+
+volumes:
+  pms_server_volume:
+    name: pms_server_volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/services/pms-server/volumes/pms_server
+
+networks:
+  services_network:
+    external: true
