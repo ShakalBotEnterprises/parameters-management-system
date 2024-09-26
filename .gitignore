@@ -1,0 +1,13 @@
+**/.idea
+**/target
+**/cvs
+
+**/*.log
+**/*.sql
+**/*.properties
+**/*.txt
+**/*.iml
+**/.env
+**/*.y*ml
+
+!**/application-PROD.yaml
