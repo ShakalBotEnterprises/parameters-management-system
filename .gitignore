@@ -11,3 +11,4 @@
 **/*.y*ml
 
 !**/application-PROD.yaml
+!**/docker-compose.yml

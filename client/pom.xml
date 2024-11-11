@@ -6,15 +6,77 @@
     <parent>
         <groupId>mavmi.parameters-management-system</groupId>
         <artifactId>parameters-management-system</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>00</version>
     </parent>
 
     <artifactId>client</artifactId>
+    <packaging>jar</packaging>
 
-    <properties>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>mavmi.parameters-management-system</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>3.3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>3.3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.web.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-mapstruct-binding</artifactId>
+            <version>${lombok.mapstruct.binding.version}</version>
+        </dependency>
+    </dependencies>
 </project>

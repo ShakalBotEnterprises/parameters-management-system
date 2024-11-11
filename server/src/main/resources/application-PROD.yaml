@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    url: ${common.db.url}
+    driver-class-name: ${common.db.driver.name}
+    hikari:
+      username: ${common.db.username}
+      password: ${common.db.password}
+  ssl:
+    bundle:
+      jks:
+        pms-server:
+          key:
+            alias: ${pms.server.spring.ssl.bundle.jks.telegram-bot.key.alias}
+          keystore:
+            location: ${pms.server.spring.ssl.bundle.jks.telegram-bot.keystore.location}
+            password: ${pms.server.spring.ssl.bundle.jks.telegram-bot.keystore.password}
+          truststore:
+            location: ${pms.server.spring.ssl.bundle.jks.telegram-bot.truststore.location}
+            password: ${pms.server.spring.ssl.bundle.jks.telegram-bot.truststore.password}
+server:
+  port: ${pms.server.server.port}
+  ssl:
+    bundle: ${pms.server.server.ssl.bundle}
+    client-auth: ${pms.server.server.ssl.client-auth}
+    enabled: ${pms.server.server.ssl.enabled}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${pms.server.management.endpoints.web.exposure.include}
+logging:
+  file:
+    name: ${pms.server.logging.file.name}
+  logback:
+    rollingpolicy:
+      max-file-size: ${common.log4j.max.file.size}
