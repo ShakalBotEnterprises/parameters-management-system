@@ -1,6 +1,6 @@
 package mavmi.parameters_management_system.client.mapper;
 
-import mavmi.parameters_management_system.common.dto.server.inner.Value;
+import mavmi.parameters_management_system.common.dto.server.request.inner.Value;
 import mavmi.parameters_management_system.common.parameter.impl.Parameter;
 import org.mapstruct.Mapper;
 

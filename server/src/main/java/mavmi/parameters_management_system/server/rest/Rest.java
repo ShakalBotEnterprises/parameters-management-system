@@ -1,10 +1,12 @@
 package mavmi.parameters_management_system.server.rest;
 
 import lombok.RequiredArgsConstructor;
-import mavmi.parameters_management_system.common.dto.server.inner.Value;
 import mavmi.parameters_management_system.common.dto.server.request.GetParameterRq;
 import mavmi.parameters_management_system.common.dto.server.request.RegisterParametersRq;
+import mavmi.parameters_management_system.common.dto.server.request.UpdateParameterRq;
+import mavmi.parameters_management_system.common.dto.server.request.inner.Value;
 import mavmi.parameters_management_system.common.dto.server.response.GetParameterRs;
+import mavmi.parameters_management_system.common.utils.Utils;
 import mavmi.parameters_management_system.server.database.model.PmsModel;
 import mavmi.parameters_management_system.server.database.repository.PmsRepository;
 import mavmi.parameters_management_system.server.mapper.ParameterMapper;
@@ -46,7 +48,7 @@ public class Rest {
         );
     }
 
-    @PostMapping("/register_properties")
+    @PostMapping("/register_parameters")
     public ResponseEntity<Void> registerParameters(@RequestBody RegisterParametersRq requestBody) {
         List<Value> values = requestBody.getValues();
         for (Value value : values) {
@@ -56,6 +58,26 @@ public class Rest {
                 repository.save(model);
             }
         }
+
+        return new ResponseEntity<>(HttpStatusCode.valueOf(HttpStatus.OK.value()));
+    }
+
+    @PostMapping("/update_parameter")
+    public ResponseEntity<Void> updateParameter(@RequestBody UpdateParameterRq requestBody) {
+        Value value = requestBody.getValue();
+
+        Optional<PmsModel> optional = repository.findByName(value.getName());
+        if (optional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(HttpStatus.NOT_FOUND.value()));
+        }
+
+        PmsModel model = optional.get();
+        if (model.getType() != value.getType() || !Utils.verifyProperty(value.getValue(), value.getType())) {
+            return new ResponseEntity<>(HttpStatusCode.valueOf(HttpStatus.BAD_REQUEST.value()));
+        }
+
+        model = mapper.valueJsonToPmsModel(value);
+        repository.updateByName(model);
 
         return new ResponseEntity<>(HttpStatusCode.valueOf(HttpStatus.OK.value()));
     }
