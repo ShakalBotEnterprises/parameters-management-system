@@ -19,4 +19,12 @@ public class RemoteParameterPlugin implements ParameterPlugin {
         Parameter parameter = httpClient.getParameter(name);
         return (parameter == null) ? resourcesParameterPlugin.getParameter(name) : parameter;
     }
+
+    @Override
+    public boolean updateParameter(Parameter parameter) {
+        boolean returnValue = httpClient.updateParameter(parameter);
+        resourcesParameterPlugin.updateParameter(parameter);
+
+        return returnValue;
+    }
 }

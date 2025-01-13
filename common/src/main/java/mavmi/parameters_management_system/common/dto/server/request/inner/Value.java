@@ -1,4 +1,4 @@
-package mavmi.parameters_management_system.common.dto.server.inner;
+package mavmi.parameters_management_system.common.dto.server.request.inner;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

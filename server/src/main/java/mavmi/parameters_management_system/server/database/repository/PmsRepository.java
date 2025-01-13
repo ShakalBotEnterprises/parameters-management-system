@@ -3,6 +3,7 @@ package mavmi.parameters_management_system.server.database.repository;
 import jakarta.transaction.Transactional;
 import mavmi.parameters_management_system.server.database.model.PmsModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -19,4 +20,14 @@ public interface PmsRepository extends JpaRepository<PmsModel, Long> {
             nativeQuery = true
     )
     Optional<PmsModel> findByName(@Param("name") String name);
+
+    @Query(
+            value = "update common.parameters_management_system set " +
+                    "value = :#{#model.value} where " +
+                    "name = :#{#model.name}",
+            nativeQuery = true
+    )
+    @Modifying
+    @Transactional
+    int updateByName(@Param("model") PmsModel model);
 }

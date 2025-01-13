@@ -8,7 +8,7 @@ import mavmi.parameters_management_system.client.httpClient.HttpClient;
 import mavmi.parameters_management_system.client.mapper.ParameterMapper;
 import mavmi.parameters_management_system.client.plugin.api.ParameterPlugin;
 import mavmi.parameters_management_system.client.plugin.impl.dto.ResourcesFile;
-import mavmi.parameters_management_system.common.dto.server.inner.Value;
+import mavmi.parameters_management_system.common.dto.server.request.inner.Value;
 import mavmi.parameters_management_system.common.parameter.impl.Parameter;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
@@ -59,6 +59,16 @@ public class ResourcesParameterPlugin implements ParameterPlugin {
     @Nullable
     public Parameter getParameter(String name) {
         return parameters.get(name);
+    }
+
+    @Override
+    public boolean updateParameter(Parameter parameter) {
+        if (!parameters.containsKey(parameter.getName())) {
+            return false;
+        } else {
+            parameters.put(parameter.getName(), parameter);
+            return true;
+        }
     }
 
     private String readResourcesFile() {

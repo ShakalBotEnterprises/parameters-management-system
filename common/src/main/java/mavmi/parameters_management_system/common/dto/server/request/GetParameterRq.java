@@ -2,7 +2,7 @@ package mavmi.parameters_management_system.common.dto.server.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import mavmi.parameters_management_system.common.dto.server.inner.Value;
+import mavmi.parameters_management_system.common.dto.server.request.inner.Value;
 
 @Getter
 @Setter

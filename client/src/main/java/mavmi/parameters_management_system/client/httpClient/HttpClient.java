@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import mavmi.parameters_management_system.client.mapper.ParameterMapper;
 import mavmi.parameters_management_system.common.dto.server.request.GetParameterRq;
 import mavmi.parameters_management_system.common.dto.server.request.RegisterParametersRq;
+import mavmi.parameters_management_system.common.dto.server.request.UpdateParameterRq;
 import mavmi.parameters_management_system.common.dto.server.response.GetParameterRs;
 import mavmi.parameters_management_system.common.parameter.impl.Parameter;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,8 +25,9 @@ public class HttpClient {
     private final RestTemplate restTemplate;
     private final ParameterMapper mapper;
     private final String baseUrl;
-    private final String getPropertyEndpoint;
-    private final String registerPropertiesEndpoint;
+    private final String getParameterEndpoint;
+    private final String registerParametersEndpoint;
+    private final String updateParameterEndpoint;
 
     public HttpClient(
             SslBundles sslBundles,
@@ -33,8 +35,9 @@ public class HttpClient {
             ParameterMapper mapper,
             @Value("${pms.client.http-client.ssl-bundle-name}") String sslBundleName,
             @Value("${pms.client.http-client.url.base}") String baseUrl,
-            @Value("${pms.client.http-client.endpoint.get-property}") String getPropertyEndpoint,
-            @Value("${pms.client.http-client.endpoint.register-properties}") String registerPropertiesEndpoint
+            @Value("${pms.client.http-client.endpoint.get-parameter}") String getParameterEndpoint,
+            @Value("${pms.client.http-client.endpoint.register-parameters}") String registerParametersEndpoint,
+            @Value("${pms.client.http-client.endpoint.update-parameter}") String updateParameterEndpoint
     ) {
         try {
             restTemplateBuilder = restTemplateBuilder.setSslBundle(sslBundles.getBundle(sslBundleName));
@@ -45,13 +48,14 @@ public class HttpClient {
         this.restTemplate = restTemplateBuilder.build();
         this.mapper = mapper;
         this.baseUrl = baseUrl;
-        this.getPropertyEndpoint = getPropertyEndpoint;
-        this.registerPropertiesEndpoint = registerPropertiesEndpoint;
+        this.getParameterEndpoint = getParameterEndpoint;
+        this.registerParametersEndpoint = registerParametersEndpoint;
+        this.updateParameterEndpoint = updateParameterEndpoint;
     }
 
     @Nullable
     public Parameter getParameter(String name) {
-        mavmi.parameters_management_system.common.dto.server.inner.Value value = mavmi.parameters_management_system.common.dto.server.inner.Value
+        mavmi.parameters_management_system.common.dto.server.request.inner.Value value = mavmi.parameters_management_system.common.dto.server.request.inner.Value
                 .builder()
                 .name(name)
                 .build();
@@ -65,7 +69,7 @@ public class HttpClient {
         HttpEntity<GetParameterRq> httpEntity = new HttpEntity<>(requestBody, httpHeaders);
 
         try {
-            ResponseEntity<GetParameterRs> responseEntity = restTemplate.postForEntity(baseUrl + getPropertyEndpoint, httpEntity, GetParameterRs.class);
+            ResponseEntity<GetParameterRs> responseEntity = restTemplate.postForEntity(baseUrl + getParameterEndpoint, httpEntity, GetParameterRs.class);
             if (responseEntity.getStatusCode().equals(HttpStatusCode.valueOf(HttpStatus.NOT_FOUND.value()))) {
                 return null;
             } else {
@@ -78,7 +82,7 @@ public class HttpClient {
     }
 
     public void registerParameters(List<Parameter> parameters) {
-        List<mavmi.parameters_management_system.common.dto.server.inner.Value> values = parameters
+        List<mavmi.parameters_management_system.common.dto.server.request.inner.Value> values = parameters
                 .stream()
                 .map(mapper::parameterToValueDto)
                 .toList();
@@ -93,9 +97,30 @@ public class HttpClient {
         HttpEntity<RegisterParametersRq> httpEntity = new HttpEntity<>(requestBody, httpHeaders);
 
         try {
-            restTemplate.postForEntity(baseUrl + registerPropertiesEndpoint, httpEntity, String.class);
+            restTemplate.postForEntity(baseUrl + registerParametersEndpoint, httpEntity, String.class);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+        }
+    }
+
+    public boolean updateParameter(Parameter parameter) {
+        mavmi.parameters_management_system.common.dto.server.request.inner.Value value = mapper.parameterToValueDto(parameter);
+        UpdateParameterRq requestBody = UpdateParameterRq
+                .builder()
+                .value(value)
+                .build();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<UpdateParameterRq> httpEntity = new HttpEntity<>(requestBody, httpHeaders);
+
+        try {
+            restTemplate.postForEntity(baseUrl + updateParameterEndpoint, httpEntity, String.class);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return false;
         }
     }
 }
