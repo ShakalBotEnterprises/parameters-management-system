@@ -6,7 +6,7 @@
     <parent>
         <groupId>mavmi.parameters-management-system</groupId>
         <artifactId>parameters-management-system</artifactId>
-        <version>00</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>client</artifactId>
