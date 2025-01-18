@@ -5,6 +5,7 @@ import mavmi.parameters_management_system.client.mapper.ParameterMapper;
 import mavmi.parameters_management_system.common.dto.server.request.GetParameterRq;
 import mavmi.parameters_management_system.common.dto.server.request.RegisterParametersRq;
 import mavmi.parameters_management_system.common.dto.server.request.UpdateParameterRq;
+import mavmi.parameters_management_system.common.dto.server.response.GetAllParametersRs;
 import mavmi.parameters_management_system.common.dto.server.response.GetParameterRs;
 import mavmi.parameters_management_system.common.parameter.impl.Parameter;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -26,6 +28,7 @@ public class HttpClient {
     private final ParameterMapper mapper;
     private final String baseUrl;
     private final String getParameterEndpoint;
+    private final String getAllParametersEndpoint;
     private final String registerParametersEndpoint;
     private final String updateParameterEndpoint;
 
@@ -36,6 +39,7 @@ public class HttpClient {
             @Value("${pms.client.http-client.ssl-bundle-name}") String sslBundleName,
             @Value("${pms.client.http-client.url.base}") String baseUrl,
             @Value("${pms.client.http-client.endpoint.get-parameter}") String getParameterEndpoint,
+            @Value("${pms.client.http-client.endpoint.get-all-parameters}") String getAllParametersEndpoint,
             @Value("${pms.client.http-client.endpoint.register-parameters}") String registerParametersEndpoint,
             @Value("${pms.client.http-client.endpoint.update-parameter}") String updateParameterEndpoint
     ) {
@@ -49,6 +53,7 @@ public class HttpClient {
         this.mapper = mapper;
         this.baseUrl = baseUrl;
         this.getParameterEndpoint = getParameterEndpoint;
+        this.getAllParametersEndpoint = getAllParametersEndpoint;
         this.registerParametersEndpoint = registerParametersEndpoint;
         this.updateParameterEndpoint = updateParameterEndpoint;
     }
@@ -78,6 +83,24 @@ public class HttpClient {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return null;
+        }
+    }
+
+    public List<Parameter> getAllParameters() {
+        try {
+            ResponseEntity<GetAllParametersRs> responseEntity = restTemplate.getForEntity(baseUrl + getAllParametersEndpoint, GetAllParametersRs.class);
+            if (!responseEntity.getStatusCode().equals(HttpStatusCode.valueOf(HttpStatus.OK.value()))) {
+                return Collections.emptyList();
+            } else {
+                return responseEntity.getBody()
+                        .getParameters()
+                        .stream()
+                        .map(mapper::valueDtoToParameter)
+                        .toList();
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return Collections.emptyList();
         }
     }
 

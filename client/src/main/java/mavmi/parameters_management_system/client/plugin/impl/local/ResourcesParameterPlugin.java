@@ -62,6 +62,14 @@ public class ResourcesParameterPlugin implements ParameterPlugin {
     }
 
     @Override
+    public List<Parameter> getAllParameters() {
+        return parameters.entrySet()
+                .stream()
+                .map(Map.Entry::getValue)
+                .toList();
+    }
+
+    @Override
     public boolean updateParameter(Parameter parameter) {
         if (!parameters.containsKey(parameter.getName())) {
             return false;

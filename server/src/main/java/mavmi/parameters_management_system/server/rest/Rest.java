@@ -5,6 +5,7 @@ import mavmi.parameters_management_system.common.dto.server.request.GetParameter
 import mavmi.parameters_management_system.common.dto.server.request.RegisterParametersRq;
 import mavmi.parameters_management_system.common.dto.server.request.UpdateParameterRq;
 import mavmi.parameters_management_system.common.dto.server.request.inner.Value;
+import mavmi.parameters_management_system.common.dto.server.response.GetAllParametersRs;
 import mavmi.parameters_management_system.common.dto.server.response.GetParameterRs;
 import mavmi.parameters_management_system.common.utils.Utils;
 import mavmi.parameters_management_system.server.database.model.PmsModel;
@@ -13,13 +14,11 @@ import mavmi.parameters_management_system.server.mapper.ParameterMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -40,6 +39,23 @@ public class Rest {
         Value value = mapper.pmsModelToValueJson(pmsModelOptional.get());
         GetParameterRs responseBody = GetParameterRs.builder()
                 .value(value)
+                .build();
+
+        return new ResponseEntity<>(
+                responseBody,
+                HttpStatusCode.valueOf(HttpStatus.OK.value())
+        );
+    }
+
+    @GetMapping("/get_all_parameters")
+    public ResponseEntity<GetAllParametersRs> getAllParameters() {
+        List<Value> parametersList = repository.findAll()
+                .stream()
+                .map(mapper::pmsModelToValueJson)
+                .collect(Collectors.toList());
+
+        GetAllParametersRs responseBody = GetAllParametersRs.builder()
+                .parameters(parametersList)
                 .build();
 
         return new ResponseEntity<>(
