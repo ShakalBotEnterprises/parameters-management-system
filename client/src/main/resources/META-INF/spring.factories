@@ -1,1 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=mavmi.parameters_management_system.client.config.PmsClientConfiguration

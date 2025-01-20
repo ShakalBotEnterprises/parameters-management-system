@@ -7,6 +7,8 @@ import mavmi.parameters_management_system.client.plugin.impl.local.ResourcesPara
 import mavmi.parameters_management_system.common.parameter.impl.Parameter;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class RemoteParameterPlugin implements ParameterPlugin {
@@ -18,6 +20,12 @@ public class RemoteParameterPlugin implements ParameterPlugin {
     public Parameter getParameter(String name) {
         Parameter parameter = httpClient.getParameter(name);
         return (parameter == null) ? resourcesParameterPlugin.getParameter(name) : parameter;
+    }
+
+    @Override
+    public List<Parameter> getAllParameters() {
+        List<Parameter> parameters = httpClient.getAllParameters();
+        return (parameters.isEmpty()) ? resourcesParameterPlugin.getAllParameters() : parameters;
     }
 
     @Override
