@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: ${pms.server.spring.application.name}
   datasource:
     url: ${common.db.url}
     driver-class-name: ${common.db.driver.name}

@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>mavmi.parameters-management-system</groupId>
         <artifactId>parameters-management-system</artifactId>
@@ -10,9 +11,16 @@
     </parent>
 
     <artifactId>client</artifactId>
+    <version>${revision}</version>
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>mavmi.lib</groupId>
+            <artifactId>logging-file</artifactId>
+            <version>${lib.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>mavmi.parameters-management-system</groupId>
             <artifactId>common</artifactId>
@@ -22,13 +30,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>${spring.boot.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
