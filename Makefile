@@ -1,7 +1,8 @@
 ROOT_DIR	=	$$HOME/services/pms-server/volumes/pms_server
 
 prepareDirs:
-	-mkdir -p $(ROOT_DIR)/cert
+	-mkdir -p $(ROOT_DIR)/cert/server
+	-mkdir -p $(ROOT_DIR)/cert/postgres-client
 	-mkdir -p $(ROOT_DIR)/data
 	-mkdir -p $(ROOT_DIR)/healthcheck
 
