@@ -14,7 +14,7 @@ services:
     networks:
       - services_network
     healthcheck:
-      test: [ "CMD", "/volumes/pms_server/healthcheck/pms-server-healthcheck.sh" ]
+      test: [ "CMD-SHELL", "curl --fail --silent http://localhost:8080/actuator/health || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 6

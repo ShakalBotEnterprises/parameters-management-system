@@ -36,6 +36,10 @@ management:
     web:
       exposure:
         include: ${pms.server.management.endpoints.web.exposure.include}
+  server:
+    port: ${pms.server.management.server.port}
+    ssl:
+      enabled: ${pms.server.management.server.ssl.enabled}
 logging:
   file:
     name: ${pms.server.logging.file.name}
