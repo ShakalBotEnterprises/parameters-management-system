@@ -7,6 +7,12 @@ spring:
     hikari:
       username: ${common.db.username}
       password: ${common.db.password}
+      data-source-properties:
+        ssl: ${common.db.ssl}
+        sslmode: ${common.db.sslmode}
+        sslcert: ${pms.server.spring.datasource.hikari.data-source-properties.sslcert}
+        sslkey: ${pms.server.spring.datasource.hikari.data-source-properties.sslkey}
+        sslrootcert: ${pms.server.spring.datasource.hikari.data-source-properties.sslrootcert}
   ssl:
     bundle:
       jks:
