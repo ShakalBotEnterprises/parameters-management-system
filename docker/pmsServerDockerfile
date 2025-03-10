@@ -12,4 +12,8 @@ RUN curl -o /jdk.deb https://download.oracle.com/java/21/latest/jdk-21_linux-x64
 RUN apt-get install -y ./jdk.deb
 
 ADD ../server/target/server-00.jar /server-00.jar
-ENTRYPOINT  /usr/lib/jvm/jdk-21.0.6-oracle-x64/bin/java -Dspring.profiles.active=PROD -Xmx256m -jar /server-00.jar
+ENTRYPOINT  /usr/lib/jvm/jdk-21.0.6-oracle-x64/bin/java \
+		-jar /server-00.jar \
+		-Xmx256m \
+		--spring.config.location=file:/volumes/pms_server/spring/application-PROD.yaml \
+		-Dspring.profiles.active=PROD
