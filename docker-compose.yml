@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   pms_server:
-    image: pms-server-image
+    image: pms-server-image:${TAG:-latest}
     container_name: pms-server
     profiles: ["dev", "prod"]
     build:

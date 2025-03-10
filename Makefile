@@ -4,7 +4,7 @@ prepareDirs:
 	-mkdir -p $(ROOT_DIR)/cert/server
 	-mkdir -p $(ROOT_DIR)/cert/postgres-client
 	-mkdir -p $(ROOT_DIR)/data
-	-mkdir -p $(ROOT_DIR)/healthcheck
+	-mkdir -p $(ROOT_DIR)/spring
 
 build: prepareDirs
 	@mvn package -P PROD -U
