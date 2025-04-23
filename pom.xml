@@ -7,7 +7,7 @@
     <parent>
         <groupId>mavmi.lib</groupId>
         <artifactId>lib</artifactId>
-        <version>45ff971f7e8de54</version>
+        <version>c5406574f3c35c3</version>
     </parent>
 
     <groupId>mavmi.parameters-management-system</groupId>
@@ -23,7 +23,7 @@
 
     <properties>
         <revision>00</revision>
-        <lib.version>45ff971f7e8de54</lib.version>
+        <lib.version>c5406574f3c35c3</lib.version>
     </properties>
 
     <dependencies>
