@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>mavmi.lib</groupId>
-        <artifactId>lib</artifactId>
-        <version>aa8519a4ede3f06</version>
+        <groupId>mavmi.root_bom</groupId>
+        <artifactId>root_bom</artifactId>
+        <version>506e358e7a629ed</version>
     </parent>
 
     <groupId>mavmi.parameters-management-system</groupId>
@@ -23,7 +23,7 @@
 
     <properties>
         <revision>00</revision>
-        <lib.version>aa8519a4ede3f06</lib.version>
+        <lib.version>964ed8ad046f265</lib.version>
     </properties>
 
     <dependencies>
