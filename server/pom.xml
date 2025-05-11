@@ -15,15 +15,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>mavmi.lib</groupId>
-            <artifactId>logging-database</artifactId>
-            <version>${lib.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>mavmi.parameters-management-system</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mavmi.lib</groupId>
+            <artifactId>logging-database</artifactId>
+            <version>${lib.version}</version>
         </dependency>
 
         <dependency>
@@ -44,25 +44,21 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>${mapstruct.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
-            <version>${mapstruct.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok-mapstruct-binding</artifactId>
-            <version>${lombok.mapstruct.binding.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>${psql.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
