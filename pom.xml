@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>mavmi.lib</groupId>
-        <artifactId>lib</artifactId>
-        <version>1824d250993ad06</version>
+        <groupId>mavmi.root_bom</groupId>
+        <artifactId>root_bom</artifactId>
+        <version>bc535d94c8fbb03</version>
     </parent>
 
     <groupId>mavmi.parameters-management-system</groupId>
@@ -23,20 +23,18 @@
 
     <properties>
         <revision>00</revision>
-        <lib.version>1824d250993ad06</lib.version>
+        <lib.version>48a195447c142a9</lib.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
     </dependencies>
 
