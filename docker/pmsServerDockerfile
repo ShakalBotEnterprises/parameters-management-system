@@ -16,4 +16,4 @@ ENTRYPOINT  /usr/lib/jvm/jdk-21.0.7-oracle-x64/bin/java \
 		-jar /server-00.jar \
 		-Xmx256m \
 		--spring.config.location=file:/volumes/pms_server/spring/application-PROD.yaml \
-		-Dspring.profiles.active=PROD
+		--spring.profiles.active=PROD
