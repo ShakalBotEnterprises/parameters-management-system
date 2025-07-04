@@ -7,7 +7,7 @@
     <parent>
         <groupId>mavmi.root_bom</groupId>
         <artifactId>root_bom</artifactId>
-        <version>bc535d94c8fbb03</version>
+        <version>55ae6be8892fa5d</version>
     </parent>
 
     <groupId>mavmi.parameters-management-system</groupId>
@@ -23,7 +23,7 @@
 
     <properties>
         <revision>00</revision>
-        <lib.version>48a195447c142a9</lib.version>
+        <lib.version>8791391ebdb41cd</lib.version>
     </properties>
 
     <dependencies>
@@ -37,12 +37,4 @@
             <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub</name>
-            <url>https://maven.pkg.github.com/mavmi/CI-CD</url>
-        </repository>
-    </distributionManagement>
 </project>
