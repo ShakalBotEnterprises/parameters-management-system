@@ -26,7 +26,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/services/pms-server/volumes/pms_server
+      device: ${HOME}/services/pms_server/volumes/pms_server
 
 networks:
   services_network:
