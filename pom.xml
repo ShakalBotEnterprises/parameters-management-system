@@ -7,7 +7,7 @@
     <parent>
         <groupId>mavmi.root_bom</groupId>
         <artifactId>root_bom</artifactId>
-        <version>55ae6be8892fa5d</version>
+        <version>1</version>
     </parent>
 
     <groupId>mavmi.parameters-management-system</groupId>
@@ -23,7 +23,7 @@
 
     <properties>
         <revision>00</revision>
-        <lib.version>8791391ebdb41cd</lib.version>
+        <lib.version>1</lib.version>
     </properties>
 
     <dependencies>
