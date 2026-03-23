@@ -16,15 +16,15 @@ spring:
   ssl:
     bundle:
       jks:
-        pms:
+        server:
           key:
-            alias: ${pms.server.spring.ssl.bundle.jks.telegram-bot.key.alias}
+            alias: ${pms.server.spring.ssl.bundle.jks.server.key.alias}
           keystore:
-            location: ${pms.server.spring.ssl.bundle.jks.telegram-bot.keystore.location}
-            password: ${pms.server.spring.ssl.bundle.jks.telegram-bot.keystore.password}
+            location: ${pms.server.spring.ssl.bundle.jks.server.keystore.location}
+            password: ${pms.server.spring.ssl.bundle.jks.server.keystore.password}
           truststore:
-            location: ${pms.server.spring.ssl.bundle.jks.telegram-bot.truststore.location}
-            password: ${pms.server.spring.ssl.bundle.jks.telegram-bot.truststore.password}
+            location: ${pms.server.spring.ssl.bundle.jks.server.truststore.location}
+            password: ${pms.server.spring.ssl.bundle.jks.server.truststore.password}
 server:
   port: ${pms.server.server.port}
   ssl:
