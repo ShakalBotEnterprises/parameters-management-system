@@ -1,4 +1,4 @@
-ROOT_DIR	=	$$HOME/services/pms-server/volumes/pms-server
+ROOT_DIR	=	$$NFS/services/pms-server/volumes/pms-server
 
 prepareDirs:
 	-mkdir -p $(ROOT_DIR)/cert/server
