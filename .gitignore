@@ -12,3 +12,5 @@
 
 !**/application-PROD.yaml
 !**/docker-compose.yml
+!**/docker/build/build.yml
+!**/docker/deploy/deploy.yml
