@@ -11,9 +11,10 @@ RUN apt-get install -y curl
 RUN curl -o /jdk.deb https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
 RUN apt-get install -y ./jdk.deb
 
-ADD ../server/target/server-00.jar /server-00.jar
+ADD ./server-00.jar /server-00.jar
 ENTRYPOINT java \
 		-jar /server-00.jar \
-		-Xmx256m \
+		-XX:+UseContainerSupport \
+		-XX:MaxRAMPercentage=70.0 \
 		--spring.config.location=file:/volumes/pms-server/spring/application-PROD.yaml \
 		--spring.profiles.active=PROD

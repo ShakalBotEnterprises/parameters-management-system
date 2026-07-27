@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  pms_server:
+    image: ${PMS_IMAGE}:${TAG:-latest}
+    build:
+      context: ./
+      dockerfile: dockerfile
