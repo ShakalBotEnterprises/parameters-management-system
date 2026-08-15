@@ -18,31 +18,23 @@ services:
         reservations:
           cpus: ${PMS_REQ_CPU}
           memory: ${PMS_REQ_MEM}
+    stop_grace_period: 60s
     healthcheck:
       test: [ "CMD-SHELL", "curl --fail --silent http://localhost:8080/actuator/health || exit 1" ]
-      interval: 30s
+      interval: 5s
       timeout: 10s
-      retries: 6
+      retries: 48
     env_file:
       - .env
     networks:
       - cluster_network
     volumes:
-      - pms_server_volume:/volumes/pms-server
+      - ${NFS}/services/pms-server/volumes/pms-server:/volumes/pms-server
     logging:
       driver: "json-file"
       options:
         max-size: "15m"
         max-file: 1
-
-volumes:
-  pms_server_volume:
-    name: pms_server_volume
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${NFS}/services/pms-server/volumes/pms-server
 
 networks:
   cluster_network:
